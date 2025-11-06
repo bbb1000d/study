@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StudyMate</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="layout">
+    <header class="hero">
+      <div>
+        <h1>StudyMate</h1>
+        <p>Your personalised AI mentor for UK studies. Upload notes, set goals, and receive warm guidance crafted around you.</p>
+      </div>
+      <div class="status-pill" id="apiStatus">Offline</div>
+    </header>
+
+    <section class="card" id="authCard">
+      <h2>Your account</h2>
+      <p class="muted">Sign in to keep your preferences, trusted documents, and tailored feedback safe.</p>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-mode="login" type="button">Sign in</button>
+        <button class="auth-tab" data-mode="register" type="button">Register</button>
+      </div>
+      <form id="loginForm" class="auth-form">
+        <label>Email
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>Password
+          <input type="password" name="password" autocomplete="current-password" required />
+        </label>
+        <button type="submit">Sign in</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <label>Name
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>Password
+          <input type="password" name="password" minlength="8" autocomplete="new-password" required />
+        </label>
+        <button type="submit">Create account</button>
+      </form>
+      <div class="auth-meta hidden" id="accountMeta"></div>
+      <button id="logoutBtn" class="link-button hidden" type="button">Sign out</button>
+    </section>
+
+    <section class="card" id="profileCard">
+      <h2>Learner profile</h2>
+      <form id="profileForm">
+        <div class="field-grid">
+          <label> Name
+            <input type="text" name="name" required placeholder="Alex" />
+          </label>
+          <label> Learning style
+            <input type="text" name="learning_style" required placeholder="Visual, auditory, ..." />
+          </label>
+          <label> Study goals
+            <textarea name="goals" rows="2" placeholder="A-level Biology revision"></textarea>
+          </label>
+          <label> Weekly availability
+            <textarea name="availability" rows="2" placeholder="Mon-Thu evenings, Saturday mornings"></textarea>
+          </label>
+          <label> Preferred tone
+            <input type="text" name="tone" value="Encouraging" />
+          </label>
+        </div>
+        <button type="submit">Save profile</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Upload trusted material</h2>
+      <form id="uploadForm">
+        <div class="upload-row">
+          <input type="file" name="file" accept=".txt,.md,.pdf" required />
+          <input type="text" name="topics" placeholder="Topics (comma separated)" />
+          <button type="submit">Upload</button>
+        </div>
+      </form>
+      <ul class="document-list" id="documentList"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Coach conversation</h2>
+      <form id="coachForm" class="coach-form">
+        <select name="mode" required>
+          <option value="plan">Study planner</option>
+          <option value="notes">Revision notes</option>
+          <option value="weaknesses">Find weaknesses</option>
+          <option value="quiz">Quick quiz</option>
+          <option value="micro_quiz">Micro check-in</option>
+          <option value="chapter_summary">Chapter summary</option>
+          <option value="mock">Mock paper</option>
+          <option value="exam_drill">Exam drill</option>
+          <option value="confidence_check">Confidence check</option>
+          <option value="apply">Apply learning</option>
+        </select>
+        <textarea name="prompt" rows="3" placeholder="Tell me what to work on next..." required></textarea>
+        <button type="submit">Ask StudyMate</button>
+      </form>
+      <article class="coach-output" id="coachOutput"></article>
+    </section>
+
+    <section class="card" id="insightsCard">
+      <h2>Progress insights</h2>
+      <ul class="insights-list" id="insightsList">
+        <li>Sign in to see personalised analytics.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Assessment tracker</h2>
+      <form id="testForm" class="coach-form">
+        <input type="text" name="topic" placeholder="Topic" required />
+        <input type="text" name="score" placeholder="Score or grade" required />
+        <textarea name="notes" rows="2" placeholder="Reflection"></textarea>
+        <button type="submit">Log assessment</button>
+      </form>
+      <ul class="history-list" id="testHistory"></ul>
+    </section>
+  </main>
+  <footer class="footer">Crafted for focused revision with trusted sources only.</footer>
+  <script src="/static/main.js" type="module"></script>
+</body>
+</html>

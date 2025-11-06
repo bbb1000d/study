@@ -1,0 +1,365 @@
+:root {
+  color-scheme: light;
+  --bg-canvas: #f6f8fa;
+  --bg-panel: #ffffff;
+  --bg-muted: #f0f3f6;
+  --border: #d0d7de;
+  --shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+  --text: #24292f;
+  --text-muted: #57606a;
+  --accent: #0969da;
+  --accent-soft: rgba(9, 105, 218, 0.15);
+  --success: #238636;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-canvas);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+  background: var(--bg-canvas);
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+.brand {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.brand p {
+  margin: 0.2rem 0 0;
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+.topbar-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  border: 1px solid rgba(240, 246, 252, 0.2);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(240, 246, 252, 0.12);
+  color: #c9d1d9;
+}
+
+.badge.online {
+  background: rgba(35, 134, 54, 0.25);
+  border-color: rgba(35, 134, 54, 0.5);
+  color: #d2f8e2;
+}
+
+.app-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 320px;
+  gap: 1.5rem;
+  padding: 2rem 2.5rem;
+  align-items: start;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.panel-header {
+  margin-bottom: 1.25rem;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.panel-header p {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.auth-tabs {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.auth-tab {
+  padding: 0.45rem 1rem;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.auth-tab.active {
+  background: var(--bg-muted);
+  color: var(--text);
+}
+
+.auth-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.auth-meta {
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+  background: var(--bg-muted);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  padding: 0;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.75rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.8rem;
+  background: #ffffff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+button.primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primary:hover {
+  filter: brightness(1.05);
+}
+
+.file-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--bg-muted);
+  color: var(--text-muted);
+}
+
+.file-input input {
+  display: none;
+}
+
+.upload-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.document-list,
+.history-list,
+.insights-list,
+.planner-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.document-item,
+.history-list li,
+.insights-list li,
+.planner-list li {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  background: var(--bg-muted);
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.document-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.document-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.document-actions button {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.document-actions .ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+.document-actions .danger {
+  background: transparent;
+  color: #cf222e;
+}
+
+.coach-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.coach-output {
+  margin-top: 1rem;
+  border: 1px solid #1f2328;
+  border-radius: 10px;
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 1.2rem;
+  line-height: 1.6;
+  min-height: 120px;
+  white-space: pre-wrap;
+}
+
+.mode-select {
+  min-width: 220px;
+}
+
+.history-list span,
+.document-item span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.planner-list li strong {
+  font-weight: 600;
+}
+
+.document-preview {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-muted);
+  background: var(--bg-muted);
+  white-space: pre-wrap;
+  min-height: 180px;
+}
+
+.footer {
+  padding: 1.5rem 0 2.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1100px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .column-left,
+  .column-right {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    padding: 1rem 1.25rem;
+  }
+
+  .app-grid {
+    padding: 1.5rem 1.25rem;
+  }
+
+  button.primary,
+  .file-input {
+    width: 100%;
+    justify-content: center;
+  }
+}

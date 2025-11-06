@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>StudyMate</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">📚</span>
+          <div>
+            <h1>StudyMate</h1>
+            <p>Your trusted study partner for UK learners.</p>
+          </div>
+        </div>
+        <div class="topbar-status">
+          <span id="apiStatus" class="badge">Offline</span>
+        </div>
+      </header>
+
+      <div class="app-grid">
+        <aside class="column column-left">
+          <section class="panel" id="authPanel">
+            <header class="panel-header">
+              <h2>Account</h2>
+              <p class="muted">Sign in to keep your workspace in sync.</p>
+            </header>
+            <div class="auth-tabs">
+              <button class="auth-tab active" data-mode="login" type="button">Sign in</button>
+              <button class="auth-tab" data-mode="register" type="button">Register</button>
+            </div>
+            <form id="loginForm" class="auth-form">
+              <label>Email
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <label>Password
+                <input type="password" name="password" autocomplete="current-password" required />
+              </label>
+              <button type="submit" class="primary">Sign in</button>
+            </form>
+            <form id="registerForm" class="auth-form hidden">
+              <label>Name
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label>Email
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <label>Password
+                <input type="password" name="password" minlength="8" autocomplete="new-password" required />
+              </label>
+              <button type="submit" class="primary">Create account</button>
+            </form>
+            <div class="auth-meta hidden" id="accountMeta"></div>
+            <button id="logoutBtn" class="link-button hidden" type="button">Sign out</button>
+          </section>
+
+          <section class="panel" id="profileCard">
+            <header class="panel-header">
+              <h2>Learner profile</h2>
+              <p class="muted">Let StudyMate adapt to the way you study.</p>
+            </header>
+            <form id="profileForm">
+              <label>Name
+                <input type="text" name="name" placeholder="Alex" required />
+              </label>
+              <label>Learning style
+                <input type="text" name="learning_style" placeholder="Visual, auditory…" required />
+              </label>
+              <label>Study goals
+                <textarea name="goals" rows="2" placeholder="A-level Biology revision"></textarea>
+              </label>
+              <label>Weekly availability
+                <textarea name="availability" rows="2" placeholder="Mon-Thu evenings, 2h Saturday"></textarea>
+              </label>
+              <label>Preferred tone
+                <input type="text" name="tone" value="Encouraging" />
+              </label>
+              <button type="submit" class="primary">Save profile</button>
+            </form>
+          </section>
+
+          <section class="panel" id="documentsCard">
+            <header class="panel-header">
+              <h2>Trusted material</h2>
+              <p class="muted">Upload notes, lecture slides, or past papers.</p>
+            </header>
+            <form id="uploadForm" class="upload-form">
+              <label class="file-input">
+                <span>Choose file</span>
+                <input type="file" name="file" accept=".txt,.md,.pdf" required />
+              </label>
+              <input type="text" name="topics" placeholder="Topics (comma separated)" />
+              <button type="submit" class="primary">Upload</button>
+            </form>
+            <ul class="document-list" id="documentList">
+              <li class="muted">No documents yet. Sign in and upload to begin.</li>
+            </ul>
+          </section>
+        </aside>
+
+        <main class="column column-main">
+          <section class="panel" id="coachPanel">
+            <header class="panel-header">
+              <div>
+                <h2>AI coach</h2>
+                <p class="muted">Ask for plans, revision notes, or quick quizzes.</p>
+              </div>
+              <select name="mode" form="coachForm" class="mode-select">
+                <option value="plan">Study planner</option>
+                <option value="notes">Revision notes</option>
+                <option value="weaknesses">Find weaknesses</option>
+                <option value="quiz">Quick quiz</option>
+                <option value="micro_quiz">Micro check-in</option>
+                <option value="chapter_summary">Chapter summary</option>
+                <option value="mock">Mock paper</option>
+                <option value="exam_drill">Exam drill</option>
+                <option value="confidence_check">Confidence check</option>
+                <option value="apply">Apply learning</option>
+              </select>
+            </header>
+            <form id="coachForm" class="coach-form">
+              <textarea name="prompt" rows="3" placeholder="Tell me what to work on next…" required></textarea>
+              <button type="submit" class="primary">Ask StudyMate</button>
+            </form>
+            <article class="coach-output" id="coachOutput">Sign in to start chatting with StudyMate.</article>
+          </section>
+
+          <section class="panel" id="plannerCard">
+            <header class="panel-header">
+              <div>
+                <h2>Study planner</h2>
+                <p class="muted">Auto-generated schedule based on your documents and assessments.</p>
+              </div>
+            </header>
+            <ul class="planner-list" id="plannerList">
+              <li class="muted">Sign in to see your tailored schedule.</li>
+            </ul>
+          </section>
+
+          <section class="panel" id="testsCard">
+            <header class="panel-header">
+              <h2>Assessment tracker</h2>
+              <p class="muted">Record quizzes and mock exams to refine recommendations.</p>
+            </header>
+            <form id="testForm" class="coach-form">
+              <input type="text" name="topic" placeholder="Topic" required />
+              <input type="text" name="score" placeholder="Score or grade" required />
+              <textarea name="notes" rows="2" placeholder="Reflection"></textarea>
+              <button type="submit" class="primary">Log assessment</button>
+            </form>
+            <ul class="history-list" id="testHistory">
+              <li class="muted">Sign in to review your assessment history.</li>
+            </ul>
+          </section>
+        </main>
+
+        <aside class="column column-right">
+          <section class="panel" id="insightsCard">
+            <header class="panel-header">
+              <h2>Progress insights</h2>
+              <p class="muted">Headline stats from your study activity.</p>
+            </header>
+            <ul class="insights-list" id="insightsList">
+              <li class="muted">Sign in to see personalised analytics.</li>
+            </ul>
+          </section>
+
+          <section class="panel" id="previewCard">
+            <header class="panel-header">
+              <h2>Document preview</h2>
+              <p class="muted">Browse uploaded notes before asking the coach.</p>
+            </header>
+            <article class="document-preview" id="documentPreview">
+              Select a document to read an excerpt.
+            </article>
+          </section>
+        </aside>
+      </div>
+
+      <footer class="footer">Crafted for focused revision with trusted sources only.</footer>
+    </div>
+
+    <script src="/static/main.js" type="module"></script>
+  </body>
+</html>
